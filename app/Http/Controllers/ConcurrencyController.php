@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Concurrency;
+use App\Models\File;
 
 class ConcurrencyController extends Controller
 {
@@ -17,6 +18,7 @@ class ConcurrencyController extends Controller
      */
     public function index(Request $request)
     {
+        $files = File::all();
         [$userCount] = Concurrency::run([
             fn () => DB::table('users')->count(),
         ]);
@@ -39,6 +41,7 @@ class ConcurrencyController extends Controller
         return Inertia::render('concurrency', [
             'userCount' => $userCount,
             'data' => $data,
+            'files' => $files,
         ]);
     }
 
@@ -55,7 +58,15 @@ class ConcurrencyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'file' => 'required|file|max:10240',
+        ]);
+        $file = $data['file'];
+        $path = $file->store('files', 'public');
+        $doc = File::create([
+            'file_path' => $path,
+        ]);
+        return redirect()->route('concurrency')->with('status', 'Bestand opgeslagen');
     }
 
     /**

@@ -13,6 +13,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
     Route::get('concurrency', [ConcurrencyController::class, 'index'])->name('concurrency');
+    Route::post('concurrency/store', [ConcurrencyController::class, 'store'])->name('concurrency.store');
 });
 
 require __DIR__.'/settings.php';
