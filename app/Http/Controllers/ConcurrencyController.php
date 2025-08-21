@@ -65,6 +65,7 @@ class ConcurrencyController extends Controller
         $path = $file->store('files', 'public');
         $doc = File::create([
             'file_path' => $path,
+            'file_name' => $file->getClientOriginalName(),
         ]);
         return redirect()->route('concurrency')->with('status', 'Bestand opgeslagen');
     }

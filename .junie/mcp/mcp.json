@@ -1,0 +1,20 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/Users/jordyvanzanten/Library/Application Support/Herd/bin/php84",
+            "args": [
+                "/Users/jordyvanzanten/PhpstormProjects/example-app/artisan",
+                "boost:mcp"
+            ]
+        },
+        "herd": {
+            "command": "/Users/jordyvanzanten/Library/Application Support/Herd/bin/php84",
+            "args": [
+                "/Applications/Herd.app/Contents/Resources/herd-mcp.phar"
+            ],
+            "env": {
+                "SITE_PATH": "/Users/jordyvanzanten/PhpstormProjects/example-app"
+            }
+        }
+    }
+}

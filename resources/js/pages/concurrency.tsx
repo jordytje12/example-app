@@ -55,7 +55,12 @@ export default function Concurrency({userCount, data, files}: Props) {
                     <li key={data}>{data}</li>
                 ))}
                 {files.map((file) => (
-                    <img src={file.file_path} key={file} />
+                    <div key={file.id}>
+                        <img src={`/storage/${file.file_path}`}
+                             className="w-32 h-32 object-cover"
+                        />
+                        <p>{file.file_name}</p>
+                    </div>
                 ))}
             </section>
         </AppLayout>

@@ -17,7 +17,8 @@ class FileFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'file_name' => $this->faker->word . '.' . $this->faker->fileExtension(),
+            'file_path' => $this->faker->filePath(),
         ];
     }
 }

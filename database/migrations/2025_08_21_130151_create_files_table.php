@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->string('file_name')->nullable();
             $table->string('file_path')->nullable();
             $table->timestamps();
         });
@@ -23,6 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('files', function (Blueprint $table) {
+            $table->dropColumn(['file_name', 'file_path']);
+        });
     }
 };
