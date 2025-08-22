@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use Inertia\Inertia;
+use App\Events\FileUploaded;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Concurrency;
-use App\Models\File;
 
 class ConcurrencyController extends Controller
 {
@@ -67,6 +68,8 @@ class ConcurrencyController extends Controller
             'file_path' => $path,
             'file_name' => $file->getClientOriginalName(),
         ]);
+        // Dispatch the event
+        event(new FileUploaded($doc, Auth::user()));
         return redirect()->route('concurrency')->with('status', 'Bestand opgeslagen');
     }
 
