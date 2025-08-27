@@ -10,8 +10,17 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
+type SharedData = {
+    auth: {
+        user: {
+            name: string;
+            email: string;
+        };
+    };
+};
+
 export default function Dashboard() {
-    const { auth } = usePage().props as any;
+    const { auth } = usePage<SharedData>().props;
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
