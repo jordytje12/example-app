@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ConcurrencyController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -12,8 +12,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
-    Route::get('concurrency', [ConcurrencyController::class, 'index'])->name('concurrency');
-    Route::post('concurrency/store', [ConcurrencyController::class, 'store'])->name('concurrency.store');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('blogs-genereren', [BlogController::class, 'index'])->name('blogs-genereren');
+    Route::post('blogs-genereren', [BlogController::class, 'store'])->name('blogs-genereren.store');
 });
 
 require __DIR__.'/settings.php';

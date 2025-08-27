@@ -16,7 +16,7 @@ class FileSeeder extends Seeder
         //File::factory()->count(10)->create();
         File::factory()->create([
             'file_name' => 'Seed test',
-            'file_path' => '/files/seed-test.png',
+            'file_path' => '/files/test.csv',
         ]);
     }
 }
