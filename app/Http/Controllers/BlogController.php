@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blogs;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -9,7 +10,9 @@ class BlogController extends Controller
 {
     public function index()
     {
-        return Inertia::render('blogs-genereren');
+        $blogs = Blogs::all();
+
+        return Inertia::render('blogs/Index')->with('blogs', $blogs);
     }
     public function store(Request $request)
     {
@@ -19,6 +22,16 @@ class BlogController extends Controller
         $file = $validated['file'];
         $path = $file->store('files', 'public');
 
-        return Inertia::render('blogs-genereren');
+        return Inertia::render('blogs/Index')->with('message', 'File uploaded successfully.');
+    }
+    public function create()
+    {
+        return Inertia::render('blogs/Create');
+    }
+    public function show(String $id)
+    {
+        $blog = Blogs::findOrFail($id);
+
+        return Inertia::render('blogs/Show')->with('blog', $blog);
     }
 }

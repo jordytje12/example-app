@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Blogs;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,5 +22,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
         $this->call(FileSeeder::class);
+        Blogs::factory(5)->create();
     }
 }

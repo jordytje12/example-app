@@ -14,9 +14,13 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Blogs genereren',
-        href: '/blogs-genereren',
+        title: 'Blogs',
+        href: null,
         icon: FileText,
+        items: [
+            {title: 'Alle blogs', href: '/blogs'},
+            {title: 'Genereren', href: '/blogs/create'},
+        ],
     },
 ];
 
